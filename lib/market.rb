@@ -18,4 +18,12 @@ class Market
   def vendors_that_sell(item)
     @vendors.select { |vendor| vendor.inventory.include?(item)}
   end
+
+  def sorted_item_list
+    @vendors.map do |vendor|
+      vendor.inventory.map do |item, quantity|
+        item.name
+      end
+    end.flatten.uniq.sort { |a, b| a <=> b }
+  end
 end
