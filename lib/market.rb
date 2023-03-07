@@ -28,16 +28,21 @@ class Market
   end
 
   def total_inventory
-    items = Hash.new {|item, details| item[details] = {} }
-    item_details = Hash.new(0)
+    items = Hash.new {|item, details|}
     @vendors.each do |vendor|
       vendor.inventory.each do |item, quantity|
-        items[item] = item_details
-          item_details[:quantity] += vendor.check_stock(item) if item == vendor.inventory.first
-          require 'pry'; binding.pry
-          item_details[:vendors] = vendors_that_sell(item) if vendor.inventory.include?(item) 
+        if items[item]
+          items[item][:quantity] += quantity
+          items[item][:vendors] << vendor 
+        else
+          new_item = Hash.new 
+          new_item[:quantity] = 0
+          new_item[:vendors] = []
+          items[item] = new_item
+          new_item[:quantity] += quantity
+          new_item[:vendors] << vendor
+        end
       end
-    
     end
     items
   end
