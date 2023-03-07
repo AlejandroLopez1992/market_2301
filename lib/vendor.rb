@@ -8,7 +8,6 @@ class Vendor
   end
 
   def check_stock(item)
-    # @inventory[item] if !@inventory.include?(item)
     @inventory[item]
   end
 
