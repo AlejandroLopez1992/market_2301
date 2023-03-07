@@ -24,5 +24,12 @@ RSpec.describe Vendor do
       expect(@vendor.inventory).to eq({@item1 => 30})
       expect(@vendor.check_stock(@item1)).to eq(30)
     end
+
+    it 'multiple items can be stocked in inventory and quantity is added' do
+      @vendor.stock(@item1, 30)
+      expect(@vendor.check_stock(@item1)).to eq(30)
+      
+
+    end
   end
 end
