@@ -36,5 +36,17 @@ RSpec.describe Market do
       @market.add_vendor(@vendor3)
       expect(@market.vendors).to eq([@vendor1, @vendor2, @vendor3])
     end
+
+    it 'market can list vendor names it has added' do
+      @vendor1.stock(@item1, 35)  
+      @vendor1.stock(@item2, 7) 
+      @vendor2.stock(@item4, 50)   
+      @vendor2.stock(@item3, 25)
+      @vendor3.stock(@item1, 65)  
+      @market.add_vendor(@vendor1)   
+      @market.add_vendor(@vendor2) 
+      @market.add_vendor(@vendor3)
+      expect(@market.vendor_names).to eq([@vendor1.name, @vendor2.name, @vendor3.name])
+    end
   end
 end
